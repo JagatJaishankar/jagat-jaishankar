@@ -1,1 +1,52 @@
 @import "tailwindcss";
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "reflact";
+  default: true;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(95% 0.005 95);
+  --color-base-200: oklch(92% 0.01 95);
+  --color-base-300: oklch(80% 0.015 95);
+  --color-base-content: oklch(22% 0.02 270);
+  --color-primary: oklch(24% 0.03 265);
+  --color-primary-content: oklch(90% 0.01 95);
+  --color-secondary: oklch(66% 0.08 75);
+  --color-secondary-content: oklch(22% 0.02 270);
+  --color-accent: oklch(82% 0.09 95);
+  --color-accent-content: oklch(20% 0.02 270);
+  --color-neutral: oklch(22% 0.02 270);
+  --color-neutral-content: oklch(95% 0.005 95);
+  --color-info: oklch(82% 0.1 210);
+  --color-info-content: oklch(24% 0.04 230);
+  --color-success: oklch(60% 0.12 160);
+  --color-success-content: oklch(98% 0.005 95);
+  --color-warning: oklch(78% 0.19 60);
+  --color-warning-content: oklch(25% 0.08 30);
+  --color-error: oklch(56% 0.15 30);
+  --color-error-content: oklch(95% 0.005 95);
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.25rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1.5px;
+  --depth: 0;
+  --noise: 1;
+}
+
+.font-lora {
+  font-family: "Lora", serif;
+}
+
+.font-space {
+  font-family: "Space Mono", monospace;
+}
+
+.font-raleway {
+  font-family: "Raleway", sans-serif;
+  font-variant-ligatures: contextual;
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1;
+}
