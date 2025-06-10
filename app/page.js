@@ -8,20 +8,18 @@ export default function Home() {
     <main className="text-primary">
       {/* blog header */}
       <section className="max-w-2xl mx-auto text-center py-32 px-6">
-        <div className="font-raleway text-sm opacity-80">
+        <div className="font-raleway text-lg opacity-80">
           zero clue about next update
         </div>
-        <h1 className="font-space font-black text-4xl mb-2">
+        <h1 className="font-space font-black text-5xl mb-2">
           jagoff
           <span className="text-2xl font-extrabold opacity-80">.dev</span>
         </h1>
-        <div className="font-raleway text-sm mb-8">
-          &mdash; by jagat jaishankar
-        </div>
-        <div className="btn btn-neutral font-raleway font-extrabold mb-1">
+        <div className="font-raleway mb-8">&mdash; by jagat jaishankar</div>
+        <div className="btn btn-neutral font-raleway font-extrabold mb-1 text-lg">
           latest post
         </div>
-        <div className="font-space mb-2">
+        <div className="font-space mb-2 text-lg">
           ¯\_(ツ)_/¯
           <br />\ /<br />
           _||_
@@ -30,7 +28,7 @@ export default function Home() {
 
       {/* blog timeline view */}
       <section className="max-w-2xl mx-auto px-6">
-        <h3 className="text-2xl font-raleway font-extrabold text-center text-secondary">
+        <h3 className="text-3xl font-raleway font-extrabold text-center text-secondary">
           my recent posts
         </h3>
         <ul className="timeline timeline-snap-icon timeline-compact timeline-vertical">
@@ -39,10 +37,8 @@ export default function Home() {
               <BoltSVG />
             </div>
             <div className="timeline-end mb-6">
-              <time className="font-space text-sm uppercase opacity-80">
-                now
-              </time>
-              <div className="font-raleway text-lg font-extrabold">
+              <time className="font-space uppercase opacity-80">now</time>
+              <div className="font-raleway text-xl font-extrabold">
                 coming soon...
               </div>
               <div className="font-lora">
@@ -67,10 +63,10 @@ export default function Home() {
                   <BoltSVG />
                 </div>
                 <div className="timeline-end mb-6 space-y-1">
-                  <time className="font-space text-sm uppercase opacity-80">
+                  <time className="font-space uppercase opacity-80">
                     {post.time}
                   </time>
-                  <div className="text-lg font-extrabold font-raleway">
+                  <div className="text-xl font-extrabold font-raleway">
                     {post.title}
                   </div>
                   <Image
@@ -81,8 +77,8 @@ export default function Home() {
                     quality={80}
                     className="rounded-sm max-w-full h-auto"
                   />
-                  <div className="font-lora">{post.content}</div>
-                  <button className="btn btn-neutral btn-sm font-raleway font-bold">
+                  <div className="font-lora mb-2">{post.content}</div>
+                  <button className="btn btn-neutral font-raleway font-bold">
                     full post
                     <BoxArrowSVG />
                   </button>
@@ -97,10 +93,10 @@ export default function Home() {
               <BoltSVG />
             </div>
             <div className="timeline-end mb-6">
-              <time className="font-space text-sm uppercase opacity-80">
-                {localTimeBackThen}{" "}
+              <time className="font-space uppercase opacity-80">
+                {localTimeBackThen}
               </time>
-              <div className="text-lg font-extrabold font-raleway">
+              <div className="text-xl font-extrabold font-raleway">
                 the beginning
               </div>
               <div className="font-lora">
