@@ -1,4 +1,5 @@
-import { BoltSVG } from "./components/SVGIcons.js";
+import { BoltSVG, BoxArrowSVG } from "./components/SVGIcons.js";
+import Image from "next/image";
 
 export default function Home() {
   const backThen = "2025-06-09T02:52:45.604Z";
@@ -30,7 +31,7 @@ export default function Home() {
       {/* blog timeline view */}
       <section className="max-w-2xl mx-auto px-6">
         <h3 className="text-2xl font-raleway font-extrabold text-center text-secondary">
-          recent posts
+          my recent posts
         </h3>
         <ul className="timeline timeline-snap-icon timeline-compact timeline-vertical">
           <li>
@@ -50,21 +51,46 @@ export default function Home() {
             </div>
             <hr />
           </li>
-          <li>
-            <hr />
-            <div className="timeline-middle">
-              <BoltSVG />
-            </div>
-            <div className="timeline-end mb-6">
-              <time className="font-mono italic">1998</time>
-              <div className="text-lg font-black">iMac</div>
-              iMac is a family of all-in-one Mac desktop computers designed and
-              built by Apple Inc. It has been the primary part of Apple&apos;s
-              consumer desktop offerings since its debut in August 1998, and has
-              evolved through seven distinct forms
-            </div>
-            <hr />
-          </li>
+          {[
+            {
+              time: "9/6/2025, 7:53:44 PM",
+              title: "damn, this day",
+              content:
+                "it was a day and a half, one to remeber rofl. i am just going to add more text here to make it look like a real post. i am just going to add more text here to make it look like a real post. i am just going to add more text here to make it look like a real post.",
+              image: "/the-social-network.jpg",
+            },
+          ].map((post, index) => {
+            return (
+              <li key={index}>
+                <hr />
+                <div className="timeline-middle">
+                  <BoltSVG />
+                </div>
+                <div className="timeline-end mb-6 space-y-1">
+                  <time className="font-space text-sm uppercase opacity-80">
+                    {post.time}
+                  </time>
+                  <div className="text-lg font-extrabold font-raleway">
+                    {post.title}
+                  </div>
+                  <Image
+                    src={post.image}
+                    width={281}
+                    height={281}
+                    alt={post.image}
+                    quality={80}
+                    className="rounded-sm max-w-full h-auto"
+                  />
+                  <div className="font-lora">{post.content}</div>
+                  <button className="btn btn-neutral btn-sm font-raleway font-bold">
+                    full post
+                    <BoxArrowSVG />
+                  </button>
+                </div>
+                <hr />
+              </li>
+            );
+          })}
           <li>
             <hr />
             <div className="timeline-middle">
