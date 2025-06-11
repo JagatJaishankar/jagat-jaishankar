@@ -3,7 +3,22 @@ import Image from "next/image";
 
 export default function Home() {
   const backThen = "2025-06-09T02:52:45.604Z";
-  const localTimeBackThen = new Date(backThen).toLocaleString();
+  const localTimeBackThen = new Date(backThen).toLocaleString("en-US", {
+    month: "long", // "June"
+    day: "numeric", // "9"
+    year: "numeric", // "2025"
+    hour: "numeric", // "7"
+    minute: "2-digit", // "53"
+    hour12: false, // "PM"
+  });
+  const now = new Date().toLocaleString("en-US", {
+    month: "long", // "June"
+    day: "numeric", // "8"
+    year: "numeric", // "2025"
+    hour: "numeric", // "8"
+    minute: "2-digit",
+    hour12: false, // "PM"
+  });
   return (
     <main className="text-primary">
       {/* blog header */}
@@ -28,16 +43,13 @@ export default function Home() {
 
       {/* blog timeline view */}
       <section className="max-w-2xl mx-auto px-6">
-        <h3 className="text-3xl font-raleway font-extrabold text-center text-secondary">
-          my recent posts
-        </h3>
         <ul className="timeline timeline-snap-icon timeline-compact timeline-vertical">
           <li>
             <div className="timeline-middle">
               <BoltSVG />
             </div>
             <div className="timeline-end mb-6">
-              <time className="font-space uppercase opacity-80">now</time>
+              <time className="font-space uppercase opacity-80">{now}</time>
               <div className="font-raleway text-xl font-extrabold">
                 coming soon...
               </div>
@@ -49,10 +61,10 @@ export default function Home() {
           </li>
           {[
             {
-              time: "9/6/2025, 7:53:44 PM",
-              title: "damn, this day",
+              time: "2025-06-11T13:48:45.604Z",
+              title: "this night, things change",
               content:
-                "it was a day and a half, one to remeber rofl. i am just going to add more text here to make it look like a real post. i am just going to add more text here to make it look like a real post. i am just going to add more text here to make it look like a real post.",
+                'i am calling this the night, becuase it is the night i am going to get this blog up and running. and i am going to be "wired in" (inspired by the social network)',
               image: "/the-social-network.jpg",
             },
           ].map((post, index) => {
@@ -64,10 +76,17 @@ export default function Home() {
                 </div>
                 <div className="timeline-end mb-6 space-y-1">
                   <time className="font-space uppercase opacity-80">
-                    {post.time}
+                    {new Date(post.time).toLocaleString("en-US", {
+                      month: "long", // "June"
+                      day: "numeric", // "9"
+                      year: "numeric", // "2025"
+                      hour: "numeric", // "7"
+                      minute: "2-digit", // "53"
+                      hour12: false, // "PM"
+                    })}
                   </time>
                   <div className="text-xl font-extrabold font-raleway">
-                    {post.title}
+                    this night, things change
                   </div>
                   <Image
                     src={post.image}
