@@ -24,7 +24,7 @@ export default function AdminPage() {
     <main>
       {/* the hero section i guess */}
       <section className="max-w-3xl mx-auto px-6 py-12 text-center">
-        <h1 className="font-raleway font-black text-5xl">i'm CEO bitch</h1>
+        <h1 className="font-raleway font-black text-5xl">i&apos;m CEO bitch</h1>
         <div className="font-space text-lg opacity-80 mb-8">
           the journey matters a lot
         </div>
