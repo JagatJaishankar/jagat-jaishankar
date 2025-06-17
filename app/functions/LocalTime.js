@@ -12,7 +12,7 @@ export default function LocalTime({ isoString }) {
       year: "numeric",
       hour: "numeric",
       minute: "2-digit",
-      hour12: true,
+      hour12: false,
     });
     setLocalTime(formatted);
   }, [isoString]);

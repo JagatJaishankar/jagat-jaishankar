@@ -75,7 +75,7 @@ export default function BlogRenderer() {
             />
           ),
           p: ({ node, ...props }) => (
-            <p className="font-lora my-2 text-neutral opacity-80" {...props} />
+            <p className="font-lora my-2 text-neutral" {...props} />
           ),
           a: ({ node, ...props }) => (
             <a className="text-blue-700 link link-hover" {...props} />
