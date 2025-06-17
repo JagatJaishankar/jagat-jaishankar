@@ -1,6 +1,8 @@
 import { BoltSVG, BoxArrowSVG } from "./components/SVGIcons.js";
 import Image from "next/image";
 
+import LocalTime from "./functions/LocalTime.js";
+
 export default function Home() {
   const backThen = "2025-06-09T02:52:45.604Z";
   const localTimeBackThen = new Date(backThen).toLocaleString("en-US", {
@@ -11,14 +13,7 @@ export default function Home() {
     minute: "2-digit", // "53"
     hour12: false, // "PM"
   });
-  const now = new Date().toLocaleString("en-US", {
-    month: "long", // "June"
-    day: "numeric", // "8"
-    year: "numeric", // "2025"
-    hour: "numeric", // "8"
-    minute: "2-digit",
-    hour12: false, // "PM"
-  });
+  const now = Date.now();
   return (
     <main className="text-primary">
       {/* blog header */}
@@ -49,7 +44,9 @@ export default function Home() {
               <BoltSVG />
             </div>
             <div className="timeline-end mb-6">
-              <time className="font-space uppercase opacity-80">{now}</time>
+              <time className="font-space uppercase opacity-80">
+                <LocalTime isoString={now} />
+              </time>
               <div className="font-raleway text-xl font-extrabold">
                 coming soon...
               </div>
@@ -76,14 +73,7 @@ export default function Home() {
                 </div>
                 <div className="timeline-end mb-6 space-y-1">
                   <time className="font-space uppercase opacity-80">
-                    {new Date(post.time).toLocaleString("en-US", {
-                      month: "long", // "June"
-                      day: "numeric", // "9"
-                      year: "numeric", // "2025"
-                      hour: "numeric", // "7"
-                      minute: "2-digit", // "53"
-                      hour12: false, // "PM"
-                    })}
+                    <LocalTime isoString={post.time} />
                   </time>
                   <div className="text-xl font-extrabold font-raleway">
                     this night, things change
@@ -113,7 +103,7 @@ export default function Home() {
             </div>
             <div className="timeline-end mb-6">
               <time className="font-space uppercase opacity-80">
-                {localTimeBackThen}
+                <LocalTime isoString={backThen} />
               </time>
               <div className="text-xl font-extrabold font-raleway">
                 the beginning
