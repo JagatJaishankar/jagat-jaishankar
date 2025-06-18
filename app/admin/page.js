@@ -1,4 +1,4 @@
-import { BoltSVG, BoxArrowSVG } from "../components/SVGIcons.js";
+import { BoltSVG, EditSVG } from "../components/SVGIcons.js";
 
 import LocalTime from "../functions/LocalTime.js";
 
@@ -10,14 +10,12 @@ export default function AdminPage() {
   return (
     <main>
       {/* the hero section i guess */}
-      <section className="max-w-3xl mx-auto px-6 py-12 text-center">
+      <section className="max-w-5xl mx-auto px-6 py-12 text-center">
         <h1 className="font-raleway font-black text-5xl">i&apos;m CEO bitch</h1>
-        <div className="font-space text-lg opacity-80 mb-8">
+        <div className="font-space text-lg opacity-80">
           the journey matters a lot
         </div>
-        <button className="btn btn-neutral font-raleway font-extrabold text-lg mb-6">
-          new post
-        </button>
+        <div className="py-12">this is the new post section</div>
         <hr className="max-w-xl mx-auto" />
       </section>
 
@@ -73,8 +71,8 @@ export default function AdminPage() {
                   />
                   <div className="font-lora mb-2">{post.content}</div>
                   <button className="btn btn-neutral font-raleway font-bold">
-                    full post
-                    <BoxArrowSVG />
+                    edit post
+                    <EditSVG />
                   </button>
                 </div>
                 <hr />
