@@ -61,7 +61,7 @@ export default function Home() {
               time: "2025-06-11T13:48:45.604Z",
               title: "this night, things change",
               content:
-                'i am calling this the night, becuase it is the night i am going to get this blog up and running. and i am going to be "wired in" (inspired by the social network)',
+                'i am calling this a night, becuase it is the night i am going to get this blog up and running. and i am going to be "wired in" (inspired by the social network)',
               image: "/the-social-network.jpg",
             },
           ].map((post, index) => {
