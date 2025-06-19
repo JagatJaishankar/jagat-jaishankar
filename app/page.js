@@ -1,18 +1,22 @@
 import { BoltSVG, BoxArrowSVG } from "./components/SVGIcons.js";
 import Image from "next/image";
-
 import LocalTime from "./functions/LocalTime.js";
+import connectMongo from "@/libs/mongoose.js";
+import User from "@/models/User";
 
-export default function Home() {
-  const backThen = "2025-06-09T02:52:45.604Z";
-  const localTimeBackThen = new Date(backThen).toLocaleString("en-US", {
-    month: "long", // "June"
-    day: "numeric", // "9"
-    year: "numeric", // "2025"
-    hour: "numeric", // "7"
-    minute: "2-digit", // "53"
-    hour12: false, // "PM"
+async function getUser() {
+  await connectMongo();
+  return await User.findById("6852970da0e0bd358c2a864d").populate({
+    path: "posts",
+    options: { sort: { createdAt: -1 } },
   });
+}
+
+export default async function Home() {
+  const writer = await getUser();
+  const posts = writer.posts;
+  console.log(writer.posts);
+  const backThen = "2025-06-09T02:52:45.604Z";
   const now = Date.now();
   return (
     <main className="text-primary">
@@ -56,15 +60,7 @@ export default function Home() {
             </div>
             <hr />
           </li>
-          {[
-            {
-              time: "2025-06-11T13:48:45.604Z",
-              title: "this night, things change",
-              content:
-                'i am calling this a night, becuase it is the night i am going to get this blog up and running. and i am going to be "wired in" (inspired by the social network)',
-              image: "/the-social-network.jpg",
-            },
-          ].map((post, index) => {
+          {posts.map((post, index) => {
             return (
               <li key={index}>
                 <hr />
@@ -73,24 +69,28 @@ export default function Home() {
                 </div>
                 <div className="timeline-end mb-6 space-y-1">
                   <time className="font-space uppercase opacity-80">
-                    <LocalTime isoString={post.time} />
+                    <LocalTime isoString={post.createdAt} />
                   </time>
                   <div className="text-xl font-extrabold font-raleway">
-                    this night, things change
+                    {post.title}
                   </div>
-                  <Image
-                    src={post.image}
-                    width={281}
-                    height={281}
-                    alt={post.image}
-                    quality={80}
-                    className="rounded-sm max-w-full h-auto"
-                  />
-                  <div className="font-lora mb-2">{post.content}</div>
-                  <button className="btn btn-neutral font-raleway font-bold">
-                    full post
-                    <BoxArrowSVG />
-                  </button>
+                  {post.thumbnail && (
+                    <Image
+                      src={post.thumbnail}
+                      width={281}
+                      height={281}
+                      alt={post.image}
+                      quality={80}
+                      className="rounded-sm max-w-full h-auto"
+                    />
+                  )}
+                  <div className="font-lora mb-2">{post.description}</div>
+                  {post.content && (
+                    <button className="btn btn-neutral font-raleway font-bold">
+                      full post
+                      <BoxArrowSVG />
+                    </button>
+                  )}
                 </div>
                 <hr />
               </li>

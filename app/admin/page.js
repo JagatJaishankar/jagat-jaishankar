@@ -1,6 +1,6 @@
 import { BoltSVG, EditSVG } from "../components/SVGIcons.js";
-
 import LocalTime from "../functions/LocalTime.js";
+import FormNewPost from "../components/FormNewPost.js";
 
 import Image from "next/image";
 
@@ -10,12 +10,14 @@ export default function AdminPage() {
   return (
     <main>
       {/* the hero section i guess */}
-      <section className="max-w-5xl mx-auto px-6 py-12 text-center">
+      <section className="px-6 py-12 text-center">
         <h1 className="font-raleway font-black text-5xl">i&apos;m CEO bitch</h1>
         <div className="font-space text-lg opacity-80">
           the journey matters a lot
         </div>
-        <div className="py-12">this is the new post section</div>
+        <section className="max-w-5xl mx-auto py-12">
+          <FormNewPost />
+        </section>
         <hr className="max-w-xl mx-auto" />
       </section>
 

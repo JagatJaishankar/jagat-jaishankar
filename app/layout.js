@@ -1,5 +1,6 @@
 import { Lora, Raleway, Space_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 const lora = Lora({
   variable: "--font-lora",
@@ -28,6 +29,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${lora.variable} ${raleway.variable} ${space.variable} antialiased`}
       >
+        <div className="font-lora font-bold">
+          <Toaster />
+        </div>
         {children}
       </body>
     </html>
