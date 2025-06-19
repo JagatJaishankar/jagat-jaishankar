@@ -3,10 +3,12 @@ import Image from "next/image";
 import LocalTime from "./functions/LocalTime.js";
 import connectMongo from "@/libs/mongoose.js";
 import User from "@/models/User";
+import Post from "@/models/Post";
+import ImageDynamicBlur from "./components/ImageDynamicBlur.js";
 
 async function getUser() {
   await connectMongo();
-  return await User.findById("6852970da0e0bd358c2a864d").populate({
+  return await User.findById("6852a2fc8a2238dc074d2ebb").populate({
     path: "posts",
     options: { sort: { createdAt: -1 } },
   });
@@ -75,14 +77,7 @@ export default async function Home() {
                     {post.title}
                   </div>
                   {post.thumbnail && (
-                    <Image
-                      src={post.thumbnail}
-                      width={281}
-                      height={281}
-                      alt={post.image}
-                      quality={80}
-                      className="rounded-sm max-w-full h-auto"
-                    />
+                    <ImageDynamicBlur src={post.thumbnail} alt={post.title} />
                   )}
                   <div className="font-lora mb-2">{post.description}</div>
                   {post.content && (

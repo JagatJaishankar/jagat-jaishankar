@@ -58,7 +58,7 @@ const FormNewPost = () => {
             value={title}
             onChange={(event) => setTitle(event.target.value)}
           />
-        </fieldset>{" "}
+        </fieldset>
         <fieldset className="fieldset">
           <legend className="fieldset-legend font-space font-black">
             upload post thumbnail
@@ -66,8 +66,31 @@ const FormNewPost = () => {
           <input
             type="file"
             className="file-input font-lora w-full lowercase"
-            value={thumbnail}
-            onChange={(event) => setThumbnail(event.target.value)}
+            onChange={async (event) => {
+              const file = event.target.files[0];
+              if (!file) return;
+
+              const formData = new FormData();
+              formData.append("file", file);
+              formData.append("upload_preset", "thumbnail_upload"); // 👈 your preset name
+
+              try {
+                const res = await fetch(
+                  "https://api.cloudinary.com/v1_1/dd3e7r60v/image/upload", // 👈 replace this
+                  {
+                    method: "POST",
+                    body: formData,
+                  },
+                );
+
+                const data = await res.json();
+                setThumbnail(data.secure_url); // ✅ save the uploaded URL in state
+                toast.success("thumbnail uploaded!");
+              } catch (err) {
+                console.error("Upload error", err);
+                toast.error("upload failed!");
+              }
+            }}
           />
         </fieldset>
         <fieldset className="fieldset">
