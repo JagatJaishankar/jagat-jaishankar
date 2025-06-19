@@ -7,8 +7,9 @@ import Post from "@/models/Post";
 import ImageDynamicBlur from "./components/ImageDynamicBlur.js";
 
 async function getUser() {
+  const userId = "6852a2fc8a2238dc074d2ebb";
   await connectMongo();
-  return await User.findById("6852a2fc8a2238dc074d2ebb").populate({
+  return await User.findById(userId).populate({
     path: "posts",
     options: { sort: { createdAt: -1 } },
   });
