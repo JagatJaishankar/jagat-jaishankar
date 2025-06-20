@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { BoltSVG, BoxArrowSVG } from "./components/SVGIcons.js";
 import LocalTime from "./functions/LocalTime.js";
 import connectMongo from "@/libs/mongoose.js";
