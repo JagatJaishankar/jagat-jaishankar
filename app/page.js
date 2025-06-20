@@ -1,10 +1,10 @@
 import { BoltSVG, BoxArrowSVG } from "./components/SVGIcons.js";
-import Image from "next/image";
 import LocalTime from "./functions/LocalTime.js";
 import connectMongo from "@/libs/mongoose.js";
 import User from "@/models/User";
 import Post from "@/models/Post";
 import ImageDynamicBlur from "./components/ImageDynamicBlur.js";
+import Link from "next/link";
 
 async function getUser() {
   const userId = "6852a2fc8a2238dc074d2ebb";
@@ -18,9 +18,7 @@ async function getUser() {
 export default async function Home() {
   const writer = await getUser();
   const posts = writer.posts;
-  console.log(writer.posts);
   const backThen = "2025-06-09T02:52:45.604Z";
-  const now = Date.now();
   return (
     <main className="text-primary">
       {/* blog header */}
@@ -51,14 +49,14 @@ export default async function Home() {
               <BoltSVG />
             </div>
             <div className="timeline-end mb-6">
-              <time className="font-space uppercase opacity-80">
-                <LocalTime isoString={now} />
+              <time className="font-space uppercase opacity-70">
+                near future
               </time>
               <div className="font-raleway text-xl font-extrabold">
                 coming soon...
               </div>
               <div className="font-lora">
-                i don&apos;t know when, but hopefully some time soon :)
+                i don&apos;t know when, hopefully soon :)
               </div>
             </div>
             <hr />
@@ -82,10 +80,13 @@ export default async function Home() {
                   )}
                   <div className="font-lora mb-2">{post.description}</div>
                   {post.content && (
-                    <button className="btn btn-neutral font-raleway font-bold">
+                    <Link
+                      className="btn btn-neutral font-raleway font-bold"
+                      href={`/post/${post.id}`}
+                    >
                       full post
                       <BoxArrowSVG />
-                    </button>
+                    </Link>
                   )}
                 </div>
                 <hr />

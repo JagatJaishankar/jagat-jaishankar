@@ -5,7 +5,10 @@ import ReactMarkdown from "react-markdown";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+import { useRouter } from "next/navigation";
+
 const FormNewPost = () => {
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const [description, setDescription] = useState("");
@@ -24,12 +27,12 @@ const FormNewPost = () => {
         description,
         content,
       });
-      console.log(data);
       setTitle("");
       setThumbnail("");
       setDescription("");
       setContent("");
       toast.success("post published");
+      router.refresh();
     } catch (error) {
       const errorMessage =
         error.response.data.error || error.message || "something went wrong";

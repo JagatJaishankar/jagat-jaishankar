@@ -1,12 +1,35 @@
-import { BoltSVG, EditSVG } from "../components/SVGIcons.js";
+import { BoltSVG, BoxArrowSVG } from "../components/SVGIcons.js";
 import LocalTime from "../functions/LocalTime.js";
+import connectMongo from "@/libs/mongoose.js";
+import User from "@/models/User";
+import Post from "@/models/Post";
+import ImageDynamicBlur from "../components/ImageDynamicBlur.js";
 import FormNewPost from "../components/FormNewPost.js";
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
-import Image from "next/image";
+async function getUser() {
+  const userId = "6852a2fc8a2238dc074d2ebb";
+  await connectMongo();
+  return await User.findById(userId).populate({
+    path: "posts",
+    options: { sort: { createdAt: -1 } },
+  });
+}
 
-export default function AdminPage() {
+export default async function AdminPage() {
+  const writer = await getUser();
+  const posts = writer.posts;
   const backThen = "2025-06-09T02:52:45.604Z";
-  const now = Date.now();
+
+  const session = await auth();
+  if (!session) {
+    redirect("/");
+  }
+  if (session.user.role === "reader") {
+    redirect("/");
+  }
+
   return (
     <main>
       {/* the hero section i guess */}
@@ -18,7 +41,7 @@ export default function AdminPage() {
         <section className="max-w-5xl mx-auto py-12">
           <FormNewPost />
         </section>
-        <hr className="max-w-xl mx-auto" />
+        <hr className="max-w-2xl mx-auto" />
       </section>
 
       {/* edit and delete timeline */}
@@ -29,27 +52,19 @@ export default function AdminPage() {
               <BoltSVG />
             </div>
             <div className="timeline-end mb-6">
-              <time className="font-space uppercase opacity-80">
-                <LocalTime isoString={now} />
+              <time className="font-space uppercase opacity-70">
+                near future
               </time>
               <div className="font-raleway text-xl font-extrabold">
                 coming soon...
               </div>
               <div className="font-lora">
-                i don&apos;t know when, but hopefully some time soon :)
+                i don&apos;t know when, hopefully soon :)
               </div>
             </div>
             <hr />
           </li>
-          {[
-            {
-              time: "2025-06-11T13:48:45.604Z",
-              title: "this night, things change",
-              content:
-                'i am calling this the night, becuase it is the night i am going to get this blog up and running. and i am going to be "wired in" (inspired by the social network)',
-              image: "/the-social-network.jpg",
-            },
-          ].map((post, index) => {
+          {posts.map((post, index) => {
             return (
               <li key={index}>
                 <hr />
@@ -58,24 +73,21 @@ export default function AdminPage() {
                 </div>
                 <div className="timeline-end mb-6 space-y-1">
                   <time className="font-space uppercase opacity-80">
-                    <LocalTime isoString={post.time} />
+                    <LocalTime isoString={post.createdAt} />
                   </time>
                   <div className="text-xl font-extrabold font-raleway">
-                    this night, things change
+                    {post.title}
                   </div>
-                  <Image
-                    src={post.image}
-                    width={281}
-                    height={281}
-                    alt={post.image}
-                    quality={80}
-                    className="rounded-sm max-w-full h-auto"
-                  />
-                  <div className="font-lora mb-2">{post.content}</div>
-                  <button className="btn btn-neutral font-raleway font-bold">
-                    edit post
-                    <EditSVG />
-                  </button>
+                  {post.thumbnail && (
+                    <ImageDynamicBlur src={post.thumbnail} alt={post.title} />
+                  )}
+                  <div className="font-lora mb-2">{post.description}</div>
+                  {post.content && (
+                    <button className="btn btn-neutral font-raleway font-bold">
+                      full post
+                      <BoxArrowSVG />
+                    </button>
+                  )}
                 </div>
                 <hr />
               </li>
@@ -98,7 +110,7 @@ export default function AdminPage() {
               </div>
             </div>
           </li>
-        </ul>
+        </ul>{" "}
       </section>
     </main>
   );
